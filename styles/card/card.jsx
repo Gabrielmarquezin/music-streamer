@@ -53,13 +53,13 @@ export const ConteinerCard = styled.div`
     
 
     //Video
-    .player-audio{
+    .Container-audio{
         display: flex;
         flex-direction: column;
         gap: 15px;
         height: 100%;
     }
-    .audio{
+    .bar-container{
         position: relative;
         margin-top: 10px;
        

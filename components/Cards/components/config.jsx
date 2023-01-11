@@ -17,7 +17,7 @@ export default function Config(props){
 
 export function ConteinConfig(){
 
-   
+    
     return(
         <Config />
     )

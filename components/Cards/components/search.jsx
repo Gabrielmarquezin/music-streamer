@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import ConteinerSearch from "../../../styles/card/search/search";
+import { RouterContext, RouterProvider} from "../../../hooks/useRouter";
+
+
 
 export default function Search(props){
-   
-    
+    const [route] = useContext(RouterContext)
+
     return(
         <ConteinerSearch>
-            <p>{props.text}</p>
+                <p>{route}</p>
 
-            <div className="input">
-                <input type="text"  placeholder="PESQUISAR MUSICA"/>
-            </div>
+                <div className="input">
+                    <input type="text"  placeholder="PESQUISAR MUSICA"/>
+                </div>
         </ConteinerSearch>
     )
 }

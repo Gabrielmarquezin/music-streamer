@@ -5,23 +5,21 @@ import MenuH from "../components/menu/menu-h/menu-h";
 import Conteiner from "../styles/index/Conteiner";
 import MenuV from "../components/menu/menu-v/menu-v";
 import ConteinCard from "../components/Cards/card";
+import { RouterProvider } from "../hooks/useRouter";
 
 export default function handle({dados}){
-    const [text, setText] = useState('Home')
-
-    function handleRouter(e){
-        const text = e.target.innerText ? e.target.innerText : "Home"
-        setText(text)
-    }
+   
 
    return(
     <>
-        <GlobalStyle />
-        <MenuH router={handleRouter}/>
-        <Conteiner>
-            <MenuV router={handleRouter}/>
-            <ConteinCard text={text} data={dados}/>
-        </Conteiner>
+        <RouterProvider>
+            <GlobalStyle />
+            <MenuH />
+            <Conteiner>
+                <MenuV />
+                <ConteinCard data={dados}/>
+            </Conteiner>
+        </RouterProvider>
     </>
    )
 }
