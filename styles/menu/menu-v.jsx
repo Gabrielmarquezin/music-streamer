@@ -4,7 +4,8 @@ const ConteinerMenuV = styled.div`
    
     width: 280px;    
     background-color: #2F2F2F;
-
+    min-height: 100vh;
+    
     .nav .conteiner-ul{
         display: flex;
         flex-direction: column;
@@ -27,10 +28,15 @@ const ConteinerMenuV = styled.div`
         text-decoration: none;
     }
 
+
     //events
 
     .conteiner-ul ul li:hover{
         background-color: #585858cf;
+    }
+
+    @media (max-width: 820px) {
+       display: none;
     }
 `;
 

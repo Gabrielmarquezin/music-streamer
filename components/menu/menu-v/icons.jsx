@@ -15,7 +15,7 @@ export function Heart(){
 
 export function Plus(){
     return(
-        <FontAwesomeIcon icon={faSquarePlus} />
+        <FontAwesomeIcon icon={faSquarePlus} className="icon"/>
     )
 }
 

@@ -1,16 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart} from '@fortawesome/free-regular-svg-icons';
-import { faEllipsisVertical, faHeart as faHeartSolid, faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faPenToSquare} from '@fortawesome/free-regular-svg-icons';
+import { faEllipsisVertical, faHeart as faHeartSolid, faCircleUser, faX} from '@fortawesome/free-solid-svg-icons';
 
 export default function HeartRegular(){
     return(
-        <FontAwesomeIcon icon={faHeart} />
+        <FontAwesomeIcon icon={faHeart} className="icon"/>
     )
 }
 
 export function HeartSolid(){
     return(
-        <FontAwesomeIcon icon={faHeartSolid} />
+        <FontAwesomeIcon icon={faHeartSolid} className="icon"/>
     )
 }
 
@@ -23,6 +23,18 @@ export function EllipsVertical(){
 export function PerfilIcon(props){
     return(
         <FontAwesomeIcon icon={faCircleUser} className="icon-user" onClick={props.onClick}/>
+    )
+}
+
+export function X(){
+    return(
+        <FontAwesomeIcon icon={faX} className="icon"/>
+    )
+}
+
+export function PentSquare(){
+    return(
+        <FontAwesomeIcon icon={faPenToSquare} className='icon' />
     )
 }
  

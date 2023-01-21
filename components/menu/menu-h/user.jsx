@@ -70,6 +70,8 @@ export function ConteinUserPerfil(){
     )
 }
 
+
+
 function Perfil(props){
     return(
         <img className="perfil-img" src={props.photo} onClick={props.onClick}/>

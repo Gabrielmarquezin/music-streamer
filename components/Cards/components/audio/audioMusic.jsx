@@ -1,15 +1,28 @@
-import react, { useEffect, useRef, useState} from "react";
-import Play, {Pause} from "../../../../public/icons/VideoIcon";
+import react, { useContext, useEffect, useRef, useState} from "react";
+import useChangeMusic from "../../../../hooks/useChangeMusic";
+import Play, {Back, Next, Pause, Repeat, Shuffle} from "../../../../public/icons/VideoIcon";
+import { renderContext } from "../../../../RenderControl/RenderCard";
+import { AudioContext } from "../../card";
+import { RenderLoading } from "../../cardSelected/cardSelected";
 
 export default function AudioPlayer(props){
 
    const [pause, setPause] = useState(false)
+   const [resetAudio, setResetAudio] = useContext(AudioContext) 
 
-   const audio = useRef(null)
-   const barProgress = useRef(null)
-   const barLoader = useRef(null)
+   const audio = useRef()
+   const barProgress = useRef()
+   const barLoader = useRef()
    const IntervalBarProgress = useRef()
-   
+
+   const [render] = useContext(renderContext)
+
+   //Next music e loading
+   const [loading,setLoading,musicNext,,index, setIndex] = useContext(RenderLoading)
+   const [,,setObj,obj] = useContext(renderContext)
+  
+   const [MusicChaged] = useChangeMusic()
+    
    useEffect(()=>{
         if(pause){
             IntervalBarProgress.current = IncreasingBar()
@@ -18,6 +31,14 @@ export default function AudioPlayer(props){
         }
    },[pause])
 
+
+   useEffect(()=>{   
+        if(resetAudio){
+            setPause(false)
+            audio.current.pause()
+        }  
+   }, [render])
+
    function ControllerAudio(){
         if(pause){
             setPause(false)
@@ -25,6 +46,7 @@ export default function AudioPlayer(props){
             
         }else{
             setPause(true)
+            audio.current.load()
             audio.current.play()
         }
    }
@@ -32,10 +54,14 @@ export default function AudioPlayer(props){
    function IncreasingBar(){
         return (
             setInterval(()=>{
+                if(audio.current == null){
+                    clearInterval(IntervalBarProgress.current)
+                    
+                    return
+                }
+                
                 const progress = (audio.current.currentTime / audio.current.duration)*100
                 barLoader.current.style.width = `calc(${progress}% + 1%)`
-
-                console.log("render")
             })
         )
    }
@@ -49,6 +75,32 @@ export default function AudioPlayer(props){
         
         barLoader.current.style.width = `${widthBar}%`
         
+   }
+
+   function changeMusic(index){
+        setLoading(true)
+
+        const musicData = MusicChaged(musicNext, obj.musicName, index)
+        musicData.then(music =>{
+            setLoading(false)
+            setObj(music)
+
+        }).catch(error =>{
+            setIndex(0)
+            setLoading(false)
+            console.log(error)
+        })
+   }
+
+   function NextMusic(){
+        changeMusic(index)
+        setIndex(index + 1)
+   }
+
+   function ComeMusic(){
+        setIndex(index - 1)
+        changeMusic(index)
+        console.log(index)
    }
     
     return(
@@ -68,8 +120,12 @@ export default function AudioPlayer(props){
                 </div>
 
                 <div className="player-pause">
-                    <div className="render-icon" onClick={ControllerAudio}>
-                        {pause ? <Pause /> : <Play /> }
+                    <div className="render-icon" >
+                        <Shuffle />
+                        <Back onClick={ComeMusic}/>
+                        {pause ? <Pause onClick={ControllerAudio}/> : <Play onClick={ControllerAudio}/> }
+                        <Next onClick={NextMusic}/>
+                        <Repeat />
                     </div>
                 </div>
         </div>

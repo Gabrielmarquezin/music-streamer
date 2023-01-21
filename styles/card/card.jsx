@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { device } from "../MediaQueries/medias";
 
 const MainConteiner = styled.div`
     width: 100%;
     padding: 0px 40px 0px 40px;
+    display: flex;
+    flex-direction: column;
     
     .conteiner-card{
         width: 100%;
@@ -13,7 +16,29 @@ const MainConteiner = styled.div`
         justify-content: space-between;
         direction : rtl;
         grid-row-gap: 30px;
+        
     }
+
+    .blocked{
+        display: none;
+    }
+
+    .center-loading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    .teste{
+        height: 100%;
+    }
+
+    @media screen and (${device.smartphone}) {
+        padding: 0 3px 5px 3px;
+    }
+
 
 `
 
@@ -26,8 +51,10 @@ export const ConteinerCard = styled.div`
     padding: 28px 28px 10px 28px;
     direction : ltr;
 
+
     .img{
         width: 100%;
+        cursor: pointer;
         
     }
 
@@ -39,6 +66,7 @@ export const ConteinerCard = styled.div`
         color: white;
         font-size: 0.8rem;
         margin-top: 10px;
+        cursor: pointer;
     }
 
     .icons-info{
@@ -51,7 +79,9 @@ export const ConteinerCard = styled.div`
         position: relative;
     }
     
-
+    .icon{
+        cursor: pointer;
+    }
     //Video
     .Container-audio{
         display: flex;
@@ -62,6 +92,7 @@ export const ConteinerCard = styled.div`
     .bar-container{
         position: relative;
         margin-top: 10px;
+        cursor: pointer;
        
     }
    .audio-loader{
@@ -76,6 +107,7 @@ export const ConteinerCard = styled.div`
         height: 3px;
         background-color: white;
         z-index: 2;
+        
     }
 
    .boll{
@@ -111,6 +143,18 @@ export const ConteinerCard = styled.div`
         margin-top: 8px;
     }
 
+    .iconBlocked{
+        display: none;
+    }
+    
+    //event
+    .hover-class{
+        transform: scale(2, 2);
+    }
+
+    @media screen and (max-width: 820px){
+        height: 100%;
+    }
 `
 
 

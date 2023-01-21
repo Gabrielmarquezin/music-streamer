@@ -1,7 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
  
 const GlobalStyle = createGlobalStyle`
-  
+
+  #__next{
+    min-height: 100vh;
+  }
+
   *{
     margin: 0;
     padding: 0;
@@ -10,8 +14,10 @@ const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    height: 100vh;
+    height: ${(props)=> props.form ? 100+"vh" : 100+"%"};
+    overflow: ${(props)=> props.form && "hidden"};
     background-color: #1E1E1E;
+    position: relative;
   }
 `;
  
